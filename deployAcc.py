@@ -25,7 +25,7 @@ async def deploy_contract():
     # Connect to StarkNet
     client = FullNodeClient(node_url=NODE_URL)
     
-    # Deploy the account contract
+    # Deploy the account contract with reduced max fee
     deployment = await Account.deploy_account_v1(
         address=int(account_data['address'], 16),
         class_hash=int(ACCOUNT_CLASS_HASH, 16),
@@ -33,7 +33,7 @@ async def deploy_contract():
         key_pair=key_pair,
         client=client,
         constructor_calldata=[key_pair.public_key],
-        max_fee=int(1e16)
+        max_fee=int(0.001 * 1e18)  # Reduced from 1e16 to 0.001 ETH
     )
     
     # Wait for transaction

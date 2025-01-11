@@ -17,7 +17,7 @@ ETH_CONTRACT = os.getenv("ETH_CONTRACT_ADDRESS")
 PRIVATE_KEY = int(os.getenv("PRIVATE_KEY"), 16)
 WALLET_ADDRESS = os.getenv("WALLET_ADDRESS")
 
-async def transfer_eth(to_address, amount_eth=0.01):
+async def transfer_eth(to_address, amount_eth=0.003):
     print("\nUsing sender wallet:", WALLET_ADDRESS)
     
     # Initialize client

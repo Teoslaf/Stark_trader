@@ -7,6 +7,7 @@ import asyncio
 from dotenv import load_dotenv
 import os
 import json
+import datetime
 
 # Load environment variables
 load_dotenv()
@@ -48,7 +49,9 @@ async def create_account():
     account_data = {
         "address": hex(address),
         "private_key": hex(key_pair.private_key),
-        "public_key": hex(key_pair.public_key)
+        "public_key": hex(key_pair.public_key),
+        "status": "created",
+        "timestamp": datetime.datetime.now().isoformat()
     }
     
     with open('new_account.json', 'w') as f:

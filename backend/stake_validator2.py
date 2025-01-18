@@ -74,7 +74,7 @@ async def main():
             print(f"- {func_name}")
 
         try:
-            # Try to enter the pool (first time)
+            # First-time staking
             print(f"\nAttempting to stake {AMOUNT_TO_STAKE / 1e18} STRK...")
             stake_call = await validator_contract.functions["enter_delegation_pool"].invoke_v3(
                 ACCOUNT_ADDRESS,  # reward_address
@@ -83,10 +83,11 @@ async def main():
             )
             await stake_call.wait_for_acceptance()
             print("First time staking successful!")
+            return stake_call.hash  # Return the transaction hash
             
         except Exception as e:
             if "Pool member exists" in str(e):
-                # If already a member, add to existing position
+                # Adding to existing position
                 print("Already a pool member. Adding to existing position...")
                 stake_call = await validator_contract.functions["add_to_delegation_pool"].invoke_v3(
                     ACCOUNT_ADDRESS,  # pool_member
@@ -95,14 +96,13 @@ async def main():
                 )
                 await stake_call.wait_for_acceptance()
                 print("Additional staking successful!")
+                return stake_call.hash  # Return the transaction hash
             else:
-                # If it's a different error, raise it
                 raise e
 
     except Exception as e:
-        print(f"Error in main: {e}")
-        import traceback
-        traceback.print_exc()
+        print(f"Error in staking: {e}")
+        raise e
 
 if __name__ == "__main__":
     import asyncio

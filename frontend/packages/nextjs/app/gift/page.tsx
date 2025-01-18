@@ -195,7 +195,7 @@ export default function WalletPage() {
           Gift Sent Successfully! 🎁
         </h3>
         <p className="text-gray-300 mb-6">
-          Your gift of 2.4 STRK has been sent to Tom.
+          Your gift of 1 STRK has been sent to Tom.
         </p>
         <a
           href={`https://sepolia.voyager.online/tx/${txHash}`}
@@ -251,8 +251,7 @@ export default function WalletPage() {
           {/* Send to New Address */}
           <div className="bg-[#1a1f38] rounded-2xl p-6 mb-4">
             <h3 className="text-xl font-bold text-white mb-4">
-              I mean you, don't have to know how to use a wallet, but you can
-              just send the gift!
+			Forget about wallets—simply send the gift effortlessly!
             </h3>
             <div className="space-y-4">
               <div>

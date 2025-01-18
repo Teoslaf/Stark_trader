@@ -65,22 +65,11 @@ async def transfer_exact_amount(to_address, amount_strk):
         tx_hash = hex(resp.transaction_hash)
         print(f"Transaction hash: {tx_hash}")
         
-        # Wait for transaction confirmation
-        print("Waiting for transaction confirmation...")
-        await account.client.wait_for_tx(resp.transaction_hash, check_interval=10)
+        # Wait for transaction
+        await account.client.wait_for_tx(resp.transaction_hash)
+        print("Transfer complete!")
         
-        # Verify the transfer by checking recipient's balance
-        new_balance_response = await contract.functions["balanceOf"].call(int(to_address, 16))
-        new_balance = new_balance_response[0]
-        print(f"New recipient balance: {new_balance / 1e18} STRK")
-        
-        print("Transfer complete and confirmed!")
-        
-        return {
-            "tx_hash": tx_hash,
-            "confirmed": True,
-            "new_balance": str(new_balance / 1e18)
-        }
+        return tx_hash
         
     except Exception as e:
         print(f"Error during transfer: {e}")
@@ -92,8 +81,9 @@ async def main():
         with open('new_account.json', 'r') as f:
             account_data = json.load(f)
         
+        # Get the address and amount to send
         to_address = account_data['address']
-        amount_strk = 2.54 
+        amount_strk = 2.54  # Get amount from JSON
         
         if not amount_strk:
             print("Error: No amount specified in new_account.json")

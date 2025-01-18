@@ -1,0 +1,6 @@
+starknet-py==0.25.0
+python-dotenv==1.0.1
+fastapi==0.115.6
+uvicorn==0.34.0
+pydantic==2.10.5
+aiohttp==3.11.11

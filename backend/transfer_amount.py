@@ -73,36 +73,4 @@ async def transfer_exact_amount(to_address, amount_strk):
         
     except Exception as e:
         print(f"Error during transfer: {e}")
-        raise
-
-async def main():
-    try:
-        # Read the account and payment data from file
-        with open('new_account.json', 'r') as f:
-            account_data = json.load(f)
-        
-        # Get the address and amount to send
-        to_address = account_data['address']
-        amount_strk = 2.54  # Get amount from JSON
-        
-        if not amount_strk:
-            print("Error: No amount specified in new_account.json")
-            return
-            
-        print(f"Sending {amount_strk} STRK to account: {to_address}")
-        tx_hash = await transfer_exact_amount(to_address, amount_strk)
-        
-        # Save transaction hash to the JSON file
-        account_data['funding_tx_hash'] = tx_hash
-        with open('new_account.json', 'w') as f:
-            json.dump(account_data, f, indent=4)
-        
-        print(f"\nTransaction hash saved to new_account.json")
-        
-    except FileNotFoundError:
-        print("Error: Please run CreateAcc.py first to generate the account")
-    except Exception as e:
-        print(f"Error: {e}")
-
-if __name__ == "__main__":
-    asyncio.run(main()) 
+        raise 

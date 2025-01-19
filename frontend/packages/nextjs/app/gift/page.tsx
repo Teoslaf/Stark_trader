@@ -195,7 +195,12 @@ export default function WalletPage() {
           Gift Sent Successfully! 🎁
         </h3>
         <p className="text-gray-300 mb-6">
-          Your gift of 1 STRK has been sent to Tom.
+          Your gift of {selectedContact?.amount || newAmount} STRK has been sent
+          to{" "}
+          {selectedContact?.name ||
+            (newAddress.endsWith(".stark")
+              ? newAddress
+              : `${newAddress.slice(0, 6)}...${newAddress.slice(-4)}`)}
         </p>
         <a
           href={`https://sepolia.voyager.online/tx/${txHash}`}
@@ -251,7 +256,7 @@ export default function WalletPage() {
           {/* Send to New Address */}
           <div className="bg-[#1a1f38] rounded-2xl p-6 mb-4">
             <h3 className="text-xl font-bold text-white mb-4">
-			Forget about wallets—simply send the gift effortlessly!
+              Forget about wallets—simply send the gift effortlessly!
             </h3>
             <div className="space-y-4">
               <div>
@@ -292,17 +297,47 @@ export default function WalletPage() {
               </div>
               <button
                 onClick={handleNewAddress}
-                disabled={!isValidAddress || !newAddress || !newAmount}
+                disabled={
+                  !isValidAddress || !newAddress || !newAmount || isLoading
+                }
                 className={`w-full flex items-center justify-center gap-2 p-3 rounded-xl transition-all
                   ${
-                    isValidAddress && newAddress && newAmount
+                    isValidAddress && newAddress && newAmount && !isLoading
                       ? "bg-yellow-400 hover:bg-yellow-500 text-black"
                       : "bg-gray-600 text-gray-400 cursor-not-allowed"
                   }
                 `}
               >
-                <PlusCircleIcon className="w-5 h-5" />
-                Send Gift 🎁
+                {isLoading ? (
+                  <>
+                    <svg
+                      className="animate-spin h-5 w-5 text-black"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    <span>Sending Gift...</span>
+                  </>
+                ) : (
+                  <>
+                    <PlusCircleIcon className="w-5 h-5" />
+                    <span>Send Gift 🎁</span>
+                  </>
+                )}
               </button>
             </div>
           </div>
@@ -318,6 +353,13 @@ export default function WalletPage() {
                   • You're sending{" "}
                   <span className="text-white font-bold">
                     {selectedContact.amount} STRK
+                  </span>{" "}
+                  to{" "}
+                  <span className="text-white font-bold">
+                    {selectedContact.name ||
+                      (selectedContact.address.endsWith(".stark")
+                        ? selectedContact.address
+                        : `${selectedContact.address.slice(0, 6)}...${selectedContact.address.slice(-4)}`)}
                   </span>
                 </p>
                 <p>• This gift will help them get started with Starknet</p>

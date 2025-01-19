@@ -113,6 +113,19 @@ class PriceService {
       console.error("Error fetching prices:", error);
     }
   }
+
+  public calculateStrkAmount(usdAmount: number): number {
+    try {
+      if (!this.currentStrkCurrencyPrice || this.currentStrkCurrencyPrice === 0) {
+        return 0;
+      }
+      // Calculate how many STRK tokens for the USD amount
+      return Number((usdAmount / this.currentStrkCurrencyPrice).toFixed(2));
+    } catch (error) {
+      console.log("Price calculation error (safely ignored):", error);
+      return 0;
+    }
+  }
 }
 
 export const priceService = PriceService.getInstance();

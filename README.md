@@ -52,38 +52,6 @@ StarkGift is a decentralized application built on StarkNet that revolutionizes h
 - Virtual environment
 - StarkNet wallet
 
-## Docker Setup 🐳
-
-### Prerequisites
-- Docker
-- Docker Compose
-
-### Quick Start with Docker
-
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd starkgift
-```
-
-2. Create environment files:
-```bash
-# Frontend
-cp frontend/packages/nextjs/.env.example frontend/packages/nextjs/.env
-# Backend
-cp backend/.env.example backend/.env
-```
-
-3. Start the application:
-```bash
-docker-compose up -d
-```
-
-The services will be available at:
-http://localhost:3000
-
-or
-
 ### Frontend Installation
 
 1. Setup frontend:

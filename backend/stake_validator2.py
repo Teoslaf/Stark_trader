@@ -68,10 +68,6 @@ async def main():
             provider=account
         )
 
-        # Debug: Print all available functions
-        print("\nAvailable functions in validator contract:")
-        for func_name in validator_contract.functions:
-            print(f"- {func_name}")
 
         try:
             # First-time staking

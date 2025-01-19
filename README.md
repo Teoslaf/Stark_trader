@@ -3,27 +3,6 @@
 ## Overview 🚀
 StarkGift is a decentralized application built on StarkNet that revolutionizes how parents can manage their children's digital assets while enabling family and friends to send gifts securely. Our platform combines a user-friendly frontend interface with a robust backend for secure blockchain interactions.
 
-## Tech Stack 🛠️
-
-### Frontend Technologies
-- **Next.js 14**: React framework for production
-- **Starknet.js**: StarkNet blockchain interaction
-- **@starknet-react/core**: React hooks for StarkNet
-- **TailwindCSS & DaisyUI**: Styling and components
-- **TypeScript**: Type-safe development
-- **Starknetkit**: Wallet connection
-
-### Backend Technologies
-- **FastAPI**: High-performance web framework for building APIs
-- **Starknet.py**: Python SDK for StarkNet blockchain interaction
-- **Python-dotenv**: Environment variable management
-- **Uvicorn**: Lightning-fast ASGI server
-
-### Smart Contract Integration
-- StarkNet Smart Contracts
-- Cairo Language Support
-- Account Abstraction
-
 ## Features 📋
 
 ### Parent Dashboard
